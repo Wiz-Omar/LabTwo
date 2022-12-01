@@ -1,0 +1,40 @@
+Debugger:
+
+1. The method was found in the debugger and is called daysInMonth()
+
+2. From the "locals" command, we can deduce the names of the variables. From that we can try and guess their usage in
+the program. However, it seems that the variable someDayInYear is supposed to represent the count of days up until the
+date that comes first, and similarly, laterDayInYear, is supposed to be the number of days from the start of the year
+until the dat that comes second. This is not implemented correctly because input "1 1 1 2" or any input with two dates
+of the same month seem to result in laterDayInYear being zero
+
+3. It is intuitive to try testing February in this kind of programs, and as expected, the program does not take into
+account that the month has 28 days (29 on leap years but that is ignored since the program assumes that the dates fall
+under the same year, which means that the leap year argument is irrelevant)
+
+4. Note that the program works under the assumption that the input is in the form (Month that comes first, day that comes
+first, month that comes second, day that comes second) so there are hidden requirements from the user in the program's
+specification
+
+5. The program does not include any kind of input error checking or try-except statements. That means that input error
+will cause the program to go into a halt or yield wrong result if for example on writes as if the month February has
+30 days and 31 days: "2 30 2 31"
+
+6. Using the month July yields unexpected results. (After looking at the code, the bug became obvious since July has 31
+days and not 30)
+
+------------------------------------------------------------------------------------------------------------------------
+
+Code:
+
+1. The method 'daysInMonth(int month)' to begin with is incorrectly formulated; the month July has 31 and not 30 days,
+instead it should be replaced with the month of April, i.e 4.
+
+2. The method also takes no consideration to the special input "2" which is the month of February with 28 days.
+
+3. Both for loops should start from the month 1 unrelated to each other, assuming that the implementation chosen is the
+one mentioned in bug "2" in the debugging part.
+
+4. Not a bug but something that is always being discussed in similar programs: should the end day be included in the
+calculation of days? If so then adding 1 to the end result should be sufficient. Maybe implement a question of input as:
+"Include the end day? (y/n) (default: y)"
